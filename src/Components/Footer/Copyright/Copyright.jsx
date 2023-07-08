@@ -1,3 +1,3 @@
 export const Copyright = ({ s }) => {
-  return <p className={s.copyright}>© INSPIRED, 2023</p>;
+  return <p className={s.copyright}>&copy; INSPIRED, 2023</p>;
 };
