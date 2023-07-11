@@ -14,7 +14,7 @@ const {activeGender, genderList, categories} = useSelector(state => state.naviga
         <li key={gender} className={s.item}>
           <NavLink
             className={({ isActive }) => cn(s.link, (isActive || gender === activeGender) && s.linkActive)}
-            to={gender}
+            to={`/catalog/${gender}`}
           >
             {categories[gender].title}
           </NavLink>

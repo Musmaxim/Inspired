@@ -6,11 +6,11 @@ import { Copyright } from "./Copyright/Copyright";
 import { Development } from "./Development/Development";
 import { Social } from "./Social/Social";
 
-export const Footer = ({ list }) => {
+export const Footer = () => {
   return (
     <footer>
       <Container className={s.container}>
-        <Category s={s} list={list} />
+        <Category s={s} />
         <Contacts s={s} />
         <Copyright s={s} />
         <Development s={s} />
