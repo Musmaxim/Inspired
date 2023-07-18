@@ -10,10 +10,10 @@ import cn from "classnames";
 import { useState } from "react";
 import { ColorList } from "../ColorList/ColorList";
 import { Count } from "../Count/Count";
-import { ReactComponent as Like } from "../../assets/heart.svg";
 import { ProductSize } from "./ProductSize/ProductSize";
 import { Goods } from "../Goods/Goods";
 import { fetchCategory } from "../../features/goodsSlice";
+import { BtnLike } from "../BtnLike/BtnLike";
 
 export const ProductPage = () => {
   const dispatch = useDispatch();
@@ -48,7 +48,9 @@ export const ProductPage = () => {
   }, [id, dispatch]);
 
   useEffect(() => {
-    dispatch(fetchCategory({ gender, category, count: 4, top: true, exclude: id }));
+    dispatch(
+      fetchCategory({ gender, category, count: 4, top: true, exclude: id })
+    );
   }, [gender, category, id, dispatch]);
 
   return (
@@ -94,13 +96,8 @@ export const ProductPage = () => {
               <button className={s.addCart} type="submit">
                 В корзину
               </button>
-              <button
-                className={s.favorite}
-                aria-label="Добавить в избранное"
-                type="button"
-              >
-                <Like />
-              </button>
+
+              <BtnLike id={id}/>
             </div>
           </form>
         </Container>
