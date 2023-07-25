@@ -23,6 +23,16 @@ export const fetchCategory = createAsyncThunk(
   }
 );
 
+export const fetchAll = createAsyncThunk("goods/fetchAll", async (param) => {
+  const url = new URL(GOODS_URL);
+  for (const key in param) {
+    url.searchParams.append(key, param[key]);
+  }
+  url.searchParams.append("count", "all");
+  const responce = await fetch(url);
+  return await responce.json();
+});
+
 const goodsSlice = createSlice({
   name: "goods",
   initialState: {
@@ -33,7 +43,7 @@ const goodsSlice = createSlice({
     pages: 0,
     totalCount: null,
   },
-  reducers:{
+  reducers: {
     setPage: (state, action) => {
       state.page = action.payload;
     },
@@ -47,7 +57,7 @@ const goodsSlice = createSlice({
         state.status = "success";
         state.goodsList = action.payload;
         state.page = 0;
-        state.totalCount=null;
+        state.totalCount = null;
       })
       .addCase(fetchGender.rejected, (state, action) => {
         state.status = "failed";
@@ -63,6 +73,19 @@ const goodsSlice = createSlice({
         state.totalCount = action.payload.totalCount;
       })
       .addCase(fetchCategory.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(fetchAll.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAll.fulfilled, (state, action) => {
+        state.status = "success";
+        state.goodsList = action.payload;
+        state.page = 0;
+        state.totalCount = null;
+      })
+      .addCase(fetchAll.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
