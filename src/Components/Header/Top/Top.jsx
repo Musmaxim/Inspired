@@ -8,7 +8,10 @@ import { ReactComponent as CartSVG } from "../../../assets/cart.svg";
 import { ReactComponent as SearchSVG } from "../../../assets/search.svg";
 import { useSelector } from "react-redux";
 
-export const Top = () => {
+export const Top = ({setOpenSearch, openSearch}) => {
+  const handleOpenSearch =()=>{
+    setOpenSearch(!openSearch);
+  }
   const { countItems } = useSelector(state => state.cart)
   return (
     <div className={s.top}>
@@ -22,7 +25,7 @@ export const Top = () => {
         <div className={s.navigation}>
           <ul className={s.navList}>
             <li className={s.navItem}>
-              <button className={s.link}>
+              <button className={s.link} onClick={handleOpenSearch}>
                 <SearchSVG />
               </button>
             </li>
