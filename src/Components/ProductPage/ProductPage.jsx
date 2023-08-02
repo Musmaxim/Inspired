@@ -95,7 +95,7 @@ export const ProductPage = () => {
               <ColorList
                 colors={colors}
                 handleColorChange={handleColorChange}
-                setSelectedColor={setSelectedColor}
+                selectedColor={selectedColor}
               />
             </div>
             <ProductSize
